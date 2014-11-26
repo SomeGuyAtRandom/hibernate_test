@@ -29,6 +29,22 @@ public class Main {
 
 		
 	}
+	private static void addAddress(UserDetails user){
+		user.getAddresses().add(getAddress("1212 Boogie Av","Any Town","CA","12345"));
+		user.getAddresses().add(getAddress("1213 Main St","Funky Town","NY","90434"));
+		user.getAddresses().add(getAddress("222 Room St","Some City","TX","96464"));
+	}
+	
+	private static Address getAddress(String street, String city, String state, String zipCode ){
+		Address address = new Address();
+		
+		address.setStreet(street);
+		address.setCity(city);
+		address.setState(state);
+		address.setZipCode(zipCode);
+		return address;
+	}
+	
 	
 	private static void getUserInfo(Session session){
 		System.out.println("getUserInfo(session)");
@@ -51,22 +67,24 @@ public class Main {
 		address.setState("CA");
 		
 		UserDetails user1 = new UserDetails();
-		UserDetails user2 = new UserDetails();
+		// UserDetails user2 = new UserDetails();
 		
 		user1.setUserName("Mr. Smith");
-		user2.setUserName("Ms. Smith");
+		//user2.setUserName("Ms. Smith");
 		
 		user1.setDiscription("Husband to Mrs. Smith");
-		user2.setDiscription("Married to Mr. Smith");
+		//user2.setDiscription("Married to Mr. Smith");
 		
 		user1.setJoinedDate(new Date());
-		user2.setJoinedDate(new Date());
+		//user2.setJoinedDate(new Date());
 		
-		user1.setAddress(address);
-		user2.setAddress(address); // note: same address
+		//user1.setAddress(address);
+		//user2.setAddress(address); // note: same address
+		addAddress(user1);
+		//addAddress(user2);
 		
 		session.save(user1);
-		session.save(user2);
+		//session.save(user2);
 		session.getTransaction().commit();
 		
 	}

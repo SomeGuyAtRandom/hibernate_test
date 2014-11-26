@@ -1,9 +1,12 @@
 package la.random.hibernate.dto;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,10 +29,21 @@ public class UserDetails {
 	@Column(name="joined")
 	private Date joinedDate;
 	
-	@Embedded
-	@AttributeOverride(name="street",column=@Column(name="street_name"))
-	private Address address;
+	//@Embedded
+	//@AttributeOverride(name="street",column=@Column(name="street_name"))
+	//private Address address;
 	
+	@ElementCollection
+	private Set<Address>addresses = new HashSet<Address>();
+	
+	
+	public Set<Address> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(Set<Address> addresses) {
+		this.addresses = addresses;
+	}
+
 	@Lob
 	private String discription;
 	
@@ -49,13 +63,13 @@ public class UserDetails {
 		this.userName = userName;
 	}
 	
-	public Address getAddress() {
-		return address;
-	}
-	
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+//	public Address getAddress() {
+//		return address;
+//	}
+//	
+//	public void setAddress(Address address) {
+//		this.address = address;
+//	}
 	
 	public Date getJoinedDate() {
 		return joinedDate;
